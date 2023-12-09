@@ -53,7 +53,10 @@ async def redirectdownloadFunction(name):
     if itag and itag != "" and config.get("transcoded") == True:
         req = requests.get(
             "https://drive.google.com/get_video_info?docid=%s" % (id),
-            headers={"Authorization": "Bearer %s" % (config.get("access_token"))},
+            headers={
+        	'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+	        'Authorization': 'Bearer %s' % (config.get("access_token"))
+    	    },
         )
         parsed = urllib.parse.parse_qs(urllib.parse.unquote(req.text))
         if parsed.get("status") == ["ok"]:
